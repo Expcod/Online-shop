@@ -10,5 +10,3 @@ admin.site.register(models.CartProduct)
 admin.site.register(models.WishList)
 admin.site.register(models.ProductReview)
 admin.site.register(models.Order)
-admin.site.register(models.OrderItem)
-

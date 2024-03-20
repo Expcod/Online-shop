@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from main.models import (Category, Product, ProductImage, WishList, ProductReview,
-                        Cart, CartProduct,Order,OrderItem,User)
+                        Cart, CartProduct,Order,User)
 
 class UserSerializer(ModelSerializer):
     class Meta:
@@ -59,9 +59,3 @@ class OrderSerializer(ModelSerializer):
         model = Order
         fields = '__all__'
 
-class OrderItemSerializer(ModelSerializer):
-    class Meta:
-        depth = 1
-        model = OrderItem
-        fields = '__all__'
-    

@@ -16,6 +16,7 @@ class Category(models.Model):
     
 
 class Product(models.Model):
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     quantity = models.IntegerField()
@@ -120,16 +121,13 @@ class CartProduct(models.Model):
             result = self.product.price * self.quantity
         return result
     
-    
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, through='OrderItem')
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    order_data=models.DateTimeField(auto_now_add=True)
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-
-
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    address = models.TextField()
+    cart_product = models.ForeignKey(CartProduct, on_delete = models.DO_NOTHING)
+    status = models.SmallIntegerField(choices =(
+        (1,"is expected"),
+        (2,"sent"),
+        (3,"recieved"),
+        (4,"returned")
+    ))
